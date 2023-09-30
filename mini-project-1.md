@@ -163,6 +163,8 @@ comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
 
+#### Class attribute of the table
+
 ``` r
 ### EXPLORE HERE ###
 ###First: look at the classes of four datasets and transform them into tibbles if they are not tibbles.####
@@ -191,6 +193,8 @@ class(steam_games)
 
 Class: All datasets are of the class *“tibble”*. *cancer_sample* and
 *steam_games* are of subclasses of tibble.
+
+#### Number of rows and variables; Data type of variables
 
 ``` r
 ###Second: take a look at the number of rows and variables. F####
@@ -349,6 +353,115 @@ The *steam_game* has 40,833 rows and 21 variables. Most variables are
 characters/string but “discount_price”, “original_price”,
 “achievements”, and “id” are numbers.
 
+#### Calculate the number of NA in each variable
+
+``` r
+sapply(apt_buildings, function(x) sum(is.na(x)))
+```
+
+    ##                               id                 air_conditioning 
+    ##                                0                               85 
+    ##                        amenities                        balconies 
+    ##                             2518                               88 
+    ##   barrier_free_accessibilty_entr                     bike_parking 
+    ##                               82                                0 
+    ##             exterior_fire_escape                       fire_alarm 
+    ##                               95                               87 
+    ##                   garbage_chutes                     heating_type 
+    ##                               83                               86 
+    ##                         intercom                     laundry_room 
+    ##                               90                               85 
+    ##           locker_or_storage_room                  no_of_elevators 
+    ##                               88                                5 
+    ##                     parking_type                     pets_allowed 
+    ##                              350                               90 
+    ##     prop_management_company_name                    property_type 
+    ##                             1363                                0 
+    ##                              rsn              separate_gas_meters 
+    ##                                0                               88 
+    ##            separate_hydro_meters            separate_water_meters 
+    ##                               87                               87 
+    ##                     site_address                 sprinkler_system 
+    ##                                0                               87 
+    ##                  visitor_parking                             ward 
+    ##                               87                                0 
+    ##                      window_type                       year_built 
+    ##                                8                               13 
+    ##                  year_registered                    no_of_storeys 
+    ##                               89                                0 
+    ##                  emergency_power             non-smoking_building 
+    ##                               86                               94 
+    ##                      no_of_units  no_of_accessible_parking_spaces 
+    ##                                0                              123 
+    ##             facilities_available                     cooling_room 
+    ##                                0                               88 
+    ## no_barrier_free_accessible_units 
+    ##                              154
+
+``` r
+sapply(cancer_sample, function(x) sum(is.na(x)))
+```
+
+    ##                      ID               diagnosis             radius_mean 
+    ##                       0                       0                       0 
+    ##            texture_mean          perimeter_mean               area_mean 
+    ##                       0                       0                       0 
+    ##         smoothness_mean        compactness_mean          concavity_mean 
+    ##                       0                       0                       0 
+    ##     concave_points_mean           symmetry_mean  fractal_dimension_mean 
+    ##                       0                       0                       0 
+    ##               radius_se              texture_se            perimeter_se 
+    ##                       0                       0                       0 
+    ##                 area_se           smoothness_se          compactness_se 
+    ##                       0                       0                       0 
+    ##            concavity_se       concave_points_se             symmetry_se 
+    ##                       0                       0                       0 
+    ##    fractal_dimension_se            radius_worst           texture_worst 
+    ##                       0                       0                       0 
+    ##         perimeter_worst              area_worst        smoothness_worst 
+    ##                       0                       0                       0 
+    ##       compactness_worst         concavity_worst    concave_points_worst 
+    ##                       0                       0                       0 
+    ##          symmetry_worst fractal_dimension_worst 
+    ##                       0                       0
+
+``` r
+sapply(parking_meters, function(x) sum(is.na(x)))
+```
+
+    ##     meter_head     r_mf_9a_6p     r_mf_6p_10     r_sa_9a_6p     r_sa_6p_10 
+    ##              0             20             20             23             20 
+    ##     r_su_9a_6p     r_su_6p_10      rate_misc time_in_effect     t_mf_9a_6p 
+    ##             23             20           9218             37             29 
+    ##     t_mf_6p_10     t_sa_9a_6p     t_sa_6p_10     t_su_9a_6p     t_su_6p_10 
+    ##             24             22             24             22             23 
+    ##      time_misc    credit_card      pay_phone      longitude       latitude 
+    ##           9551             16              4              0              0 
+    ## geo_local_area       meter_id 
+    ##              0              0
+
+``` r
+sapply(steam_games, function(x) sum(is.na(x)))
+```
+
+    ##                       id                      url                    types 
+    ##                        0                        0                        2 
+    ##                     name             desc_snippet           recent_reviews 
+    ##                        2                       41                    35317 
+    ##              all_reviews             release_date                developer 
+    ##                     9553                        2                      342 
+    ##                publisher             popular_tags             game_details 
+    ##                     5100                      135                      520 
+    ##                languages             achievements                    genre 
+    ##                       36                    28639                      438 
+    ##         game_description           mature_content     minimum_requirements 
+    ##                      103                    35126                    16953 
+    ## recommended_requirements           original_price           discount_price 
+    ##                    16947                     5353                    26290
+
+The *cancer_sample* data set has no NA values while other data sets
+contain some NAs.
+
 <!----------------------------------------------------------------------------->
 
 1.3 **(1 point)** Now that you’ve explored the 4 datasets that you were
@@ -357,13 +470,13 @@ to choose this one? Briefly explain your choice below.
 
 <!-------------------------- Start your work below ---------------------------->
 
-I choose **cancer_sample** due to its predominantly numeric variables,
-which facilitate straightforward modeling and graph creation. This
-dataset’s numerical nature makes it convenient for identifying
-noteworthy patterns. Additionally, my personal interest lies in medical
-data analysis, and this dataset offers a valuable opportunity to explore
-the relationships among various cancer-related variables and the
-ultimate diagnosis.
+I choose **cancer_sample** due to its predominantly numeric variables
+and it’s free of NA value, which facilitate straightforward modeling and
+graph creation. This dataset’s numerical nature makes it convenient for
+identifying noteworthy patterns. Additionally, my personal interest lies
+in medical data analysis, and this dataset offers a valuable opportunity
+to explore the relationships among various cancer-related variables and
+the ultimate diagnosis.
 <!----------------------------------------------------------------------------->
 
 1.4 **(2 points)** Time for a final decision! Going back to the
@@ -437,6 +550,17 @@ is dplyr and ggplot2.
 8.  Use a density plot to explore any of your variables (that are
     suitable for this type of plot).
 
+The work and plots will be shown under 2.2.
+
+2.2 **(4 points)** For each of the 4 exercises that you complete,
+provide a *brief explanation* of why you chose that exercise in relation
+to your data (in other words, why does it make sense to do that?), and
+sufficient comments for a reader to understand your reasoning and code.
+
+<!-------------------------- Start your work below ---------------------------->
+
+### Distribution of Mean Radius by Diagnosis
+
 The primary indicator frequently associated with distinguishing between
 malignant and benign masses is their “*size*”. To visually demonstrate
 this distinction, I have included a distribution plot depicting the mean
@@ -448,21 +572,23 @@ part contains exercise 1)**
 
 ``` r
 first_plot <- cancer_sample %>%
-  ggplot(aes(x=radius_mean, fill=diagnosis)) + ##color by diagnosis
+  ggplot(aes(x=radius_mean, fill=diagnosis)) + ##color by diagnosis with mean radius as x-axis
   geom_histogram(binwidth = 1)+ ##use histogram to plot distribution
-  ggtitle("the distribution of mean radius of mass")+
-  xlab("mean radius")+
-  theme_bw()
+  ggtitle("the distribution of mean radius of mass")+ ## add title
+  xlab("mean radius")+ ## add x label
+  theme_bw() ## add theme
 print(first_plot)
 ```
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 As observed in this plot, most benign breast masses exhibit a smaller
 mean radius compared to malignant masses. However, it’s worth noting
 that some malignant masses also display a smaller mean radius,
 underscoring that while size is a significant diagnostic feature, it
 should not be the sole determinant.
+
+### Adding Mean Smoothness Interval variable
 
 To delve deeper into the data analysis, I aim to explore the
 relationship between mean smoothness and the diagnosis. Given the
@@ -510,21 +636,23 @@ plot has been created:
 
 ``` r
 cancer_sample %>%
-  mutate(smoothness_mean_interval = cut_interval(smoothness_mean, 4)) %>%
-  ggplot(aes(x=smoothness_mean_interval, fill=diagnosis))+
+  mutate(smoothness_mean_interval = cut_interval(smoothness_mean, 4)) %>% ## same work as previous
+  ggplot(aes(x=smoothness_mean_interval, fill=diagnosis))+ ## x-axis is the mean smoothness interval, filling in color by diagnosis
   geom_bar(aes(y=after_stat(prop), group=1))+ ## use prop as y axis and bar chart to show the proportion.
   facet_wrap(facets = ~diagnosis)+ ##wrap by the diagnosis
   xlab("mean smoothness interval")+
   ggtitle("the distribution of mean smoothness interval")+
-  theme(axis.text.x=element_text(size=4))
+  theme(axis.text.x=element_text(size=4)) ## decrease the size of x font
 ```
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 A significant observation is that more than 65% of observations for both
 malignant and benign masses fall within the second interval of mean
 smoothness. This suggests that relying solely on smoothness for
 diagnosis may be challenging.
+
+### Density of Mean Concavity by Diagnosis
 
 Considering the importance of radius as a significant diagnostic factor,
 it is plausible that mean concavity could also contain diagnostic
@@ -537,13 +665,13 @@ exercise 8)**
 
 ``` r
 cancer_sample %>%
-  ggplot(aes(x=concavity_mean, color=diagnosis)) + ##color by diagnosis
+  ggplot(aes(x=concavity_mean, color=diagnosis)) + ##color by diagnosis, mean concavity as x-axis
   geom_density()+ ##use density plot
   xlab("mean concavity")+
   ggtitle("the density of mean concavity, stratified by diagnosis")
 ```
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 The density distribution of mean concavity for benign and malignant
 masses exhibits a pronounced dissimilarity. This disparity suggests that
@@ -551,14 +679,16 @@ malignant masses tend to have higher mean concavity values, akin to the
 observations made regarding radius. It is thus worthwhile to delve into
 the potential connection between concavity and radius.
 
+### The Relationship between Mean Concavity and Mean Radius by Diagnosis
+
 To facilitate this exploration, a plot has been provided below to
 illustrate the relationship between mean smoothness and mean texture:
 **(This part contains exercise 4)**
 
 ``` r
 cancer_sample %>%
-  ggplot(aes(x=radius_mean, y=concavity_mean)) +
-  geom_jitter(aes(color = diagnosis))+ ## use jitter to show the data distribution in the axes of mean radius and mean concavity
+  ggplot(aes(x=radius_mean, y=concavity_mean)) + ## mean radius as x-axis, mean concavity as y axis
+  geom_jitter(aes(color = diagnosis))+ ## use jitter to show the data distribution and relationship in the axes of mean radius and mean concavity
   stat_smooth()+ ## calculate the relationship.
   scale_x_log10()+ ## scale the x to show more obvious patterns of relationship.
   ggtitle("mean concavity versus mean radius, colored by diagnosis")+
@@ -568,7 +698,7 @@ cancer_sample %>%
 
     ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 The plot above reveals a positive correlation between mean radius and
 mean concavity. Additionally, malignant masses tend to exhibit both
@@ -576,13 +706,6 @@ larger mean radius and mean concavity when contrasted with benign
 masses. These findings underscore the diagnostic value of considering
 both concavity and radius when evaluating a mass, as they can provide
 valuable insights for accurate diagnosis.
-
-2.2 **(4 points)** For each of the 4 exercises that you complete,
-provide a *brief explanation* of why you chose that exercise in relation
-to your data (in other words, why does it make sense to do that?), and
-sufficient comments for a reader to understand your reasoning and code.
-
-<!-------------------------- Start your work below ---------------------------->
 
 The reason has been previously discussed in the preceding session;
 however, for the clarity, I have rearranged them as follows:
